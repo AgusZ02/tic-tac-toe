@@ -6,9 +6,19 @@ import { TURNS } from '../../Constants';
 import { checkWin } from '../../logic/board';
 import { WinnerSection } from '../WinnerSection/WinnerSection';
 function App() {
+  const [board, setBoard] = useState(()=>{
+    if (window.localStorage.getItem("board")) {
+      return JSON.parse(window.localStorage.getItem("board"));
+    }
+    return Array(9).fill(null);
+  });
   
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [turn, setTurn] = useState(TURNS.X);
+  const [turn, setTurn] = useState(()=>{
+    if (window.localStorage.getItem("turn")) {
+      return window.localStorage.getItem("turn");
+    }
+    return TURNS.X;
+  });
 
   //null -> No hay ganador, false -> empate 
   const [winner, setWinner] = useState(null);
@@ -29,6 +39,7 @@ function App() {
     const newTurn = turn ===TURNS.X ? TURNS.O : TURNS.X;
     //Reescribe el turno
     setTurn(newTurn);
+    saveGame(newBoard, newTurn);
     const newWinner = checkWin(newBoard);
     if(newWinner){
       setWinner(newWinner);
@@ -48,6 +59,19 @@ function App() {
     setBoard(Array(9).fill(null));
     setTurn(TURNS.X);
     setWinner(null);
+  }
+
+  const saveGame = (board, turn) =>{
+    window.localStorage.setItem("board", JSON.stringify(board));
+    window.localStorage.setItem("turn", turn);
+  }
+  const loadGame = (setBoard, setTurn) =>{
+    const loadedBoard = JSON.parse(window.localStorage.getItem("board"));
+    const loadedTurn = JSON.parse(window.localStorage.getItem("turn"));
+    if (loadedBoard!==undefined && loadedTurn !== undefined) {
+      setBoard(loadedBoard);
+      setTurn(loadedTurn);
+    }
   }
 
   return (
