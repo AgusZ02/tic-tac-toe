@@ -3,21 +3,17 @@ import './App.css'
 import { useState } from 'react';
 import { Square } from '../Square/Square';
 import { TURNS } from '../../Constants';
-import { checkWin } from '../../logic/board';
+import { checkWin, checkDraw } from '../../logic/board';
 import { WinnerSection } from '../WinnerSection/WinnerSection';
+import { saveGame } from '../../logic/game';
+
 function App() {
   const [board, setBoard] = useState(()=>{
-    if (window.localStorage.getItem("board")) {
-      return JSON.parse(window.localStorage.getItem("board"));
-    }
-    return Array(9).fill(null);
+    return window.localStorage.getItem("board") ? JSON.parse(window.localStorage.getItem("board")) : Array(9).fill(null);
   });
   
-  const [turn, setTurn] = useState(()=>{
-    if (window.localStorage.getItem("turn")) {
-      return window.localStorage.getItem("turn");
-    }
-    return TURNS.X;
+  const [turn, setTurn] = useState(()=>{ //Si existe turno guardado lo recupera
+    return window.localStorage.getItem("turn") ? window.localStorage.getItem("turn") : TURNS.X;
   });
 
   //null -> No hay ganador, false -> empate 
@@ -51,19 +47,10 @@ function App() {
     
   }
 
-  const checkDraw = (board) =>{
-    return !board.includes(null);
-  }
-
   const resetGame =() =>{
     setBoard(Array(9).fill(null));
     setTurn(TURNS.X);
     setWinner(null);
-  }
-
-  const saveGame = (board, turn) =>{
-    window.localStorage.setItem("board", JSON.stringify(board));
-    window.localStorage.setItem("turn", turn);
   }
 
   return (

@@ -12,3 +12,7 @@ export const checkWin = (board) =>{
     }
     return null;
 }
+
+export const checkDraw = (board) =>{
+    return !board.includes(null);
+}
