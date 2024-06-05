@@ -65,14 +65,6 @@ function App() {
     window.localStorage.setItem("board", JSON.stringify(board));
     window.localStorage.setItem("turn", turn);
   }
-  const loadGame = (setBoard, setTurn) =>{
-    const loadedBoard = JSON.parse(window.localStorage.getItem("board"));
-    const loadedTurn = JSON.parse(window.localStorage.getItem("turn"));
-    if (loadedBoard!==undefined && loadedTurn !== undefined) {
-      setBoard(loadedBoard);
-      setTurn(loadedTurn);
-    }
-  }
 
   return (
     <main className='board'>
