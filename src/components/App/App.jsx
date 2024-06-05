@@ -61,6 +61,10 @@ function App() {
     const newWinner = checkWin(newTablero);
     if(newWinner){
       setWinner(newWinner);
+    } else {
+      if(!newTablero.includes(null)){
+        setWinner(false);
+      }
     }
   }
 
