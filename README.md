@@ -8,7 +8,7 @@ A simple Tic-Tac-Toe game built with React and Vite, featuring local storage to 
 - Playable online from any browser
 
 ## Live Demo
-You can play the game live at https://agusz02.github.io/tic-tac-toe
+You can play the game live at https://agarciacif.github.io/tic-tac-toe
 
 ## How to Play
 1. Open the game in your web browser.
@@ -25,7 +25,7 @@ Before you begin, ensure you have the following installed:
 ## Installation
 1. Clone the repository:
    ```
-   git clone https://github.com/AgusZ02/tic-tac-toe.git
+   git clone https://github.com/agarciacif/tic-tac-toe.git
    ```
 
 2. Navigate to the project directory:
